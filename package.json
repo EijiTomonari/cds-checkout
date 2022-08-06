@@ -11,9 +11,13 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.2.6",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.1",
-    "firebase": "^9.9.2"
+    "firebase": "^9.9.2",
+    "framer-motion": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
