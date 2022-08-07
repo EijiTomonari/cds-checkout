@@ -22,11 +22,15 @@ const SettingSlider = ({
 }) => {
   const [value, setValue] = useState(defaultValue);
   useEffect(() => {
-    if (value)
-      fetch("/api/settings/set", {
+    if (value) {
+      const formData = new URLSearchParams();
+      formData.append("name", name);
+      formData.append("value", value.toString());
+      fetch("http://127.0.0.1:5000/settings/write", {
         method: "POST",
-        body: JSON.stringify({ name: name, value: value }),
-      });
+        body: formData,
+      }).catch((e) => console.log(e));
+    }
   }, [value]);
   return (
     <Slider
