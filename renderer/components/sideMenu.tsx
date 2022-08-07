@@ -1,11 +1,21 @@
-import { Flex, Image, Link, List, ListIcon, ListItem } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  Link,
+  List,
+  ListIcon,
+  ListItem,
+  Spacer,
+} from "@chakra-ui/react";
 import { AiOutlineHome, AiOutlineDropbox } from "react-icons/ai";
 import { FaMoneyBillWave } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
 
 const SideMenu = () => {
   return (
     <Flex
       w={"10vw"}
+      h={"100vh"}
       flexDir={"column"}
       backgroundColor={"black"}
       alignItems={"center"}
@@ -29,6 +39,21 @@ const SideMenu = () => {
           <ListItem py={2}>
             <ListIcon as={AiOutlineDropbox} color="white" />
             Produtos
+          </ListItem>
+        </Link>
+        <Link href="/tickets">
+          <ListItem py={2}>
+            <ListIcon as={AiOutlineDropbox} color="white" />
+            Comandas
+          </ListItem>
+        </Link>
+      </List>
+      <Spacer></Spacer>
+      <List color={"white"} mt={10}>
+        <Link href="/settings">
+          <ListItem py={2}>
+            <ListIcon as={FiSettings} color="white" />
+            Configurações
           </ListItem>
         </Link>
       </List>
