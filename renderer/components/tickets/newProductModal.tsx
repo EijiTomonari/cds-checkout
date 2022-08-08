@@ -66,7 +66,12 @@ const NewProductModal = ({
               type="text"
               placeholder="Nome"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) =>
+                setName(
+                  e.target.value.charAt(0).toUpperCase() +
+                    e.target.value.slice(1)
+                )
+              }
             />
             <Input
               required
