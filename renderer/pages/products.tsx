@@ -10,28 +10,30 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import ProductsListItem from "../components/products/productsListItem";
 import SideMenu from "../components/sideMenu";
 import { fetchProductsList } from "../lib/databaseServices";
 import { TicketItem } from "../modules/tickets";
 
 const Products = () => {
-  const [producsList, setProducsList] = useState<TicketItem[]>();
+  const [producsList, setProductsList] = useState<TicketItem[]>();
   const [allProductsList, setAllProductsList] = useState<TicketItem[]>();
+  const searchBarRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     fetchProductsList().then((data) => {
-      setProducsList(data as TicketItem[]);
+      setProductsList(data as TicketItem[]);
       setAllProductsList(data as TicketItem[]);
     });
+    searchBarRef.current?.focus();
   }, []);
   useEffect(() => {
-    setProducsList(allProductsList);
+    setProductsList(allProductsList);
   }, [allProductsList]);
   const search = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (value.length > 0) {
-      setProducsList(
+      setProductsList(
         allProductsList.filter(
           (item) =>
             item.name.toLowerCase().includes(value.toLowerCase()) ||
@@ -39,7 +41,7 @@ const Products = () => {
         )
       );
     } else {
-      setProducsList(allProductsList);
+      setProductsList(allProductsList);
     }
   };
   return (
@@ -48,6 +50,7 @@ const Products = () => {
       <Flex w={"90vw"} h={"100vh"} p={5} flexDir="column" overflowY={"auto"}>
         <Heading>Lista de Produtos</Heading>
         <Input
+          ref={searchBarRef}
           p={5}
           placeholder="Procurar item"
           size={"lg"}
@@ -65,10 +68,9 @@ const Products = () => {
           </Thead>
           <Tbody>
             {producsList &&
-              producsList.map((item, index) => (
+              producsList.map((item) => (
                 <ProductsListItem
-                  items={allProductsList}
-                  index={index}
+                  item={item}
                   setAllProductsList={setAllProductsList}
                 ></ProductsListItem>
               ))}
