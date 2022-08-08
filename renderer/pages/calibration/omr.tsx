@@ -4,12 +4,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import SettingSlider from "../../components/settings/settingSlider";
 import SideMenu from "../../components/sideMenu";
+import { Settings } from "../../modules/settings";
 
 const CalibrateBoxesArea = () => {
   const [settings, setSettings] = useState<Settings>();
   const router = useRouter();
   useEffect(() => {
-    fetch("../api/settings/get")
+    fetch("http://127.0.0.1:5000/settings/read")
       .then((res) => res.json())
       .then((data) => setSettings(data));
   }, []);
@@ -61,8 +62,8 @@ const CalibrateBoxesArea = () => {
               <SettingSlider
                 name={"OMR_THRESHOLD_C"}
                 defaultValue={settings["OMR_THRESHOLD_C"].value}
-                min={-20}
-                max={20}
+                min={-100}
+                max={100}
                 step={1}
               ></SettingSlider>
               <Heading mt={5} size={"md"}>
@@ -79,7 +80,7 @@ const CalibrateBoxesArea = () => {
                 name={"OMR_BOX_MAX_ASPECT_RATIO"}
                 defaultValue={settings["OMR_BOX_MAX_ASPECT_RATIO"].value}
                 min={1}
-                max={3}
+                max={10}
                 step={0.1}
               ></SettingSlider>
 
@@ -89,8 +90,8 @@ const CalibrateBoxesArea = () => {
                   settings["OMR_STANDARD_DEVIATION_THRESHOLD"].value
                 }
                 min={1}
-                max={15}
-                step={1}
+                max={4}
+                step={0.1}
               ></SettingSlider>
               <SettingSlider
                 name={"OMR_BOX_MIN_HEIGHT"}
@@ -102,6 +103,20 @@ const CalibrateBoxesArea = () => {
               <SettingSlider
                 name={"OMR_BOX_MIN_WIDTH"}
                 defaultValue={settings["OMR_BOX_MIN_WIDTH"].value}
+                min={1}
+                max={100}
+                step={1}
+              ></SettingSlider>
+              <SettingSlider
+                name={"OMR_BOX_MAX_HEIGHT"}
+                defaultValue={settings["OMR_BOX_MAX_HEIGHT"].value}
+                min={1}
+                max={100}
+                step={1}
+              ></SettingSlider>
+              <SettingSlider
+                name={"OMR_BOX_MAX_WIDTH"}
+                defaultValue={settings["OMR_BOX_MAX_WIDTH"].value}
                 min={1}
                 max={100}
                 step={1}

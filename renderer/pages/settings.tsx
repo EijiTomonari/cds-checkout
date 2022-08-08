@@ -11,12 +11,13 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import SideMenu from "../components/sideMenu";
+import { Settings } from "../modules/settings";
 
 const Settings = () => {
   const [settings, setSettings] = useState<Settings>();
   const router = useRouter();
   useEffect(() => {
-    fetch("api/settings/get")
+    fetch("http://127.0.0.1:5000/settings/read")
       .then((res) => res.json())
       .then((data) => setSettings(data));
   }, []);

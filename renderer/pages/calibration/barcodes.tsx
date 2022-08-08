@@ -9,7 +9,7 @@ const CalibrateBarcodes = () => {
   const [settings, setSettings] = useState<Settings>();
   const router = useRouter();
   useEffect(() => {
-    fetch("../api/settings/get")
+    fetch("http://127.0.0.1:5000/settings/read")
       .then((res) => res.json())
       .then((data) => setSettings(data));
   }, []);

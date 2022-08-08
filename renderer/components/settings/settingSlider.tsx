@@ -6,6 +6,7 @@ import {
   SliderTrack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import useDebounce from "../../hooks/useDebounce";
 
 const SettingSlider = ({
   name,
@@ -21,6 +22,7 @@ const SettingSlider = ({
   step: number;
 }) => {
   const [value, setValue] = useState(defaultValue);
+  const debouncedValue = useDebounce(value, 100);
   useEffect(() => {
     if (value) {
       const formData = new URLSearchParams();
@@ -31,7 +33,7 @@ const SettingSlider = ({
         body: formData,
       }).catch((e) => console.log(e));
     }
-  }, [value]);
+  }, [debouncedValue]);
   return (
     <Slider
       min={min}
