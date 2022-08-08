@@ -4,6 +4,7 @@ export interface TicketItem {
   name: string;
   price: number;
   code?: string;
+  weight?: number;
 }
 
 /**
@@ -83,9 +84,10 @@ export const processBarCodesData = (
 };
 
 const processMeal = (barcode: string, productInfo: any) => {
-  let item = { name: "Refeição", price: 0 };
+  let item = { name: "Refeição", price: 0, weight: 0 };
   const quantityString = barcode.slice(-5, -1);
   const quantity = parseInt(quantityString) / 1000;
+  item.weight = quantity;
   item.price = Math.round(quantity * productInfo.price * 100) / 100;
   return item;
 };

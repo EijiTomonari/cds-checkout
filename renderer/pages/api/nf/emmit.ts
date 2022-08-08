@@ -15,8 +15,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await keyboard.type(Key.Enter);
   await new Promise((r) => setTimeout(r, 1000));
   await keyboard.type(Key.F12);
-  await keyboard.pressKey(Key.RightSuper, Key.Num3);
-  await keyboard.releaseKey(Key.RightSuper, Key.Num3);
+  await new Promise((r) => setTimeout(r, 5000));
+  await keyboard.pressKey(Key.LeftAlt, Key.Tab);
+  await keyboard.releaseKey(Key.LeftAlt, Key.Tab);
   res.status(200).json({ message: "OK" });
 };
 

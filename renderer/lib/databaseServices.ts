@@ -8,6 +8,8 @@ import {
   doc,
   setDoc,
 } from "firebase/firestore";
+import { METHODS } from "http";
+import { TicketItem } from "../modules/tickets";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
@@ -48,5 +50,24 @@ export const addNewProduct = async (
     code: code,
     name: name,
     price: price,
+  });
+};
+
+export const storeSale = async (
+  method: string,
+  value: number,
+  items: TicketItem[]
+) => {
+  const now = new Date();
+  const totalWeight = items.reduce(
+    (acc, item) => (isNaN(item.weight) ? acc : acc + item.weight),
+    0
+  );
+  await setDoc(doc(db, "sales", now.toString()), {
+    date: now,
+    items: items,
+    method: method,
+    value: value,
+    totalWeight: totalWeight,
   });
 };
