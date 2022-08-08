@@ -53,6 +53,18 @@ export const addNewProduct = async (
   });
 };
 
+export const updateProduct = async (
+  code: string,
+  name: string,
+  price: number
+) => {
+  await setDoc(doc(db, "products", code), {
+    code: code,
+    name: name,
+    price: price,
+  });
+};
+
 export const storeSale = async (
   method: string,
   value: number,

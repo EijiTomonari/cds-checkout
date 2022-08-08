@@ -5,6 +5,7 @@ export interface TicketItem {
   price: number;
   code?: string;
   weight?: number;
+  cantDelete?: boolean;
 }
 
 /**
