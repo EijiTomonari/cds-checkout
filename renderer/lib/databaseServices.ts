@@ -95,6 +95,7 @@ export const storeSale = async (
     value: value,
     totalWeight: totalWeight,
   });
+  await incrementStatistics(now, value, method, totalWeight);
 };
 
 export const fetchSalesByDate = async (date: Date) => {
@@ -110,4 +111,56 @@ export const fetchSalesByDate = async (date: Date) => {
   const querySnapshot = await getDocs(salesQuery);
   console.log(querySnapshot);
   return querySnapshot.docs.map((doc) => doc.data() as Sale);
+};
+
+export type Statistics = {
+  value: number;
+  weight: number;
+  debit: number;
+  credit: number;
+  cash: number;
+};
+
+export const fetchStatisticsByDate = async (date: Date) => {
+  const docRef = doc(db, "statistics", date.toDateString());
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return {
+      value: 0,
+      weight: 0,
+      debit: 0,
+      credit: 0,
+      cash: 0,
+    };
+  }
+};
+
+export const incrementStatistics = async (
+  date: Date,
+  addedValue: number,
+  method: string,
+  addedWeight?: number
+) => {
+  const docRef = doc(db, "statistics", date.toDateString());
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const { value, weight } = docSnap.data();
+    await setDoc(
+      docRef,
+      {
+        value: Math.round((value + addedValue) * 100) / 100,
+        weight: Math.round((weight + addedWeight) * 100) / 100,
+        [method]: (docSnap.data()[method] ?? 0) + 1,
+      },
+      { merge: true }
+    );
+  } else {
+    await setDoc(docRef, {
+      value: addedValue,
+      weight: addedWeight,
+      [method]: 1,
+    });
+  }
 };

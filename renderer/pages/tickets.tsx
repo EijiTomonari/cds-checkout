@@ -160,7 +160,7 @@ const Tickets: NextPage = () => {
           <Hotkeys keyName="f4" onKeyDown={onOpenNotaFiscalModal}>
             <Hotkeys keyName="f5" onKeyDown={() => finishSale("debit")}>
               <Hotkeys keyName="f6" onKeyDown={() => finishSale("credit")}>
-                <Hotkeys keyName="f7" onKeyDown={() => finishSale("money")}>
+                <Hotkeys keyName="f7" onKeyDown={() => finishSale("cash")}>
                   <Flex w={"100vw"} h={"100vh"} flexDir={"row"}>
                     <NewProductModal
                       isOpen={isNewProductModalOpen}
