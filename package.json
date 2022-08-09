@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
-  "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "name": "chapeu-de-sol",
+  "description": "Aplicação de Caixa do Restaurante Chapéu de Sol",
+  "version": "2.0.0",
+  "author": "Eiji Tomonari",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import SettingSlider from "../../components/settings/settingSlider";
 import SideMenu from "../../components/sideMenu";
+import { Settings } from "../../modules/settings";
 
 const CalibrateBoxesArea = () => {
   const [settings, setSettings] = useState<Settings>();
