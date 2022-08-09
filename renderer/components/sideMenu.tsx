@@ -8,7 +8,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { AiOutlineHome, AiOutlineDropbox } from "react-icons/ai";
-import { FaMoneyBillWave } from "react-icons/fa";
+import { FaMoneyBillWave, FaCashRegister } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 
 const SideMenu = () => {
@@ -43,7 +43,7 @@ const SideMenu = () => {
         </Link>
         <Link href="/tickets">
           <ListItem py={2}>
-            <ListIcon as={AiOutlineDropbox} color="white" />
+            <ListIcon as={FaCashRegister} color="white" />
             Comandas
           </ListItem>
         </Link>

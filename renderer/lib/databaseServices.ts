@@ -6,7 +6,12 @@ import {
   getDocs,
   getDoc,
   doc,
+  where,
   setDoc,
+  limit,
+  orderBy,
+  query,
+  Timestamp,
 } from "firebase/firestore";
 import { METHODS } from "http";
 import { TicketItem } from "../modules/tickets";
@@ -65,6 +70,14 @@ export const updateProduct = async (
   });
 };
 
+export type Sale = {
+  date: Timestamp;
+  items: TicketItem[];
+  method: string;
+  value: number;
+  totalWeight?: number;
+};
+
 export const storeSale = async (
   method: string,
   value: number,
@@ -82,4 +95,19 @@ export const storeSale = async (
     value: value,
     totalWeight: totalWeight,
   });
+};
+
+export const fetchSalesByDate = async (date: Date) => {
+  const dayBefore = new Date(date);
+  dayBefore.setDate(dayBefore.getDate() - 1);
+  const salesCollection = collection(db, "sales");
+  const salesQuery = query(
+    salesCollection,
+    orderBy("date", "desc"),
+    where("date", ">", dayBefore),
+    where("date", "<=", date)
+  );
+  const querySnapshot = await getDocs(salesQuery);
+  console.log(querySnapshot);
+  return querySnapshot.docs.map((doc) => doc.data() as Sale);
 };
