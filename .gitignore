@@ -4,5 +4,6 @@ node_modules
 app
 dist
 .env
+electron-builder.env
 **/.env
 **/.env.local

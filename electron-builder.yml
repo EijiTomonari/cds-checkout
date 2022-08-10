@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: com.example.chapeu-de-sol
+productName: Chapéu de Sol Checkout
+copyright: Copyright © 2022 Chapéu de Sol
 directories:
   output: dist
   buildResources: resources

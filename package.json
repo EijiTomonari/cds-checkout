@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
-  "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "name": "chapeu-de-sol",
+  "description": "Aplicação de Caixa do Restaurante Chapéu de Sol",
+  "version": "2.0.0",
+  "author": "Eiji Tomonari",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
@@ -11,9 +11,22 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.6",
+    "@chakra-ui/react": "^2.2.6",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@nut-tree/nut-js": "^2.1.2-next.20220807055457",
+    "@tanstack/react-query": "^4.0.10",
+    "chart.js": "^3.9.1",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.1",
-    "firebase": "^9.9.2"
+    "firebase": "^9.9.2",
+    "framer-motion": "^7.0.0",
+    "jotai": "^1.7.8",
+    "react-chartjs-2": "^4.3.1",
+    "react-hot-keys": "^2.7.2",
+    "react-icons": "^4.4.0",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
