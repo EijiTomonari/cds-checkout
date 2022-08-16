@@ -38,19 +38,16 @@ const NotaFiscalModal = ({
           .reduce((acc, item) => acc + item.price, 0) * 100
       ) / 100;
     ipcRenderer.send("emmit-nf", value);
-    //fetch("api/nf/emmit?value=" + value).then(() => onClose());
   };
 
   const sendAll = () => {
     const value =
       Math.round(items.reduce((acc, item) => acc + item.price, 0) * 100) / 100;
     ipcRenderer.send("emmit-nf", value);
-    //fetch("api/nf/emmit?value=" + value).then(() => onClose());
   };
 
   const sendAmount = () => {
     ipcRenderer.send("emmit-nf", amount);
-    //fetch("api/nf/emmit?value=" + amount).then(() => onClose());
   };
 
   useEffect(() => {
