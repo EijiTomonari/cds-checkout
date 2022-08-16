@@ -63,11 +63,15 @@ export const updateProduct = async (
   name: string,
   price: number
 ) => {
-  await setDoc(doc(db, "products", code), {
-    code: code,
-    name: name,
-    price: price,
-  });
+  await setDoc(
+    doc(db, "products", code),
+    {
+      code: code,
+      name: name,
+      price: price,
+    },
+    { merge: true }
+  );
 };
 
 export type Sale = {
