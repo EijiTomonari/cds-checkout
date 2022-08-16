@@ -14,8 +14,9 @@ import {
   Stack,
   Flex,
 } from "@chakra-ui/react";
+import { ipcRenderer } from "electron";
 import { useAtom } from "jotai";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { itemsAtom } from "../../pages/tickets";
 
 const NotaFiscalModal = ({
@@ -36,18 +37,27 @@ const NotaFiscalModal = ({
           .filter((item) => item.name == "Refeição")
           .reduce((acc, item) => acc + item.price, 0) * 100
       ) / 100;
-    fetch("api/nf/emmit?value=" + value).then(() => onClose());
+    ipcRenderer.send("emmit-nf", value);
   };
 
   const sendAll = () => {
     const value =
       Math.round(items.reduce((acc, item) => acc + item.price, 0) * 100) / 100;
-    fetch("api/nf/emmit?value=" + value).then(() => onClose());
+    ipcRenderer.send("emmit-nf", value);
   };
 
   const sendAmount = () => {
-    fetch("api/nf/emmit?value=" + amount).then(() => onClose());
+    ipcRenderer.send("emmit-nf", amount);
   };
+
+  useEffect(() => {
+    ipcRenderer.on("emmit-nf", (event, data) => {
+      onClose();
+    });
+    return () => {
+      ipcRenderer.removeAllListeners("emmit-nf");
+    };
+  }, []);
 
   return (
     <Modal

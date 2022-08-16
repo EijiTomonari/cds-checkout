@@ -115,7 +115,7 @@ const SalesChart = () => {
           icon={RiScales2Line}
           title={"Kg de Alimento"}
           subtitle={"Últimos 30 dias"}
-          value={totalWeight.toString() + " kg"}
+          value={Math.round(totalWeight * 100) / 100 + " kg"}
         ></StatisticsBox>
       </Flex>
     </Flex>

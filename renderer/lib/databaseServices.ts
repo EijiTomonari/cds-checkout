@@ -63,11 +63,15 @@ export const updateProduct = async (
   name: string,
   price: number
 ) => {
-  await setDoc(doc(db, "products", code), {
-    code: code,
-    name: name,
-    price: price,
-  });
+  await setDoc(
+    doc(db, "products", code),
+    {
+      code: code,
+      name: name,
+      price: price,
+    },
+    { merge: true }
+  );
 };
 
 export type Sale = {
@@ -125,7 +129,11 @@ export const fetchStatisticsByDate = async (date: Date) => {
   const docRef = doc(db, "statistics", date.toDateString());
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    return docSnap.data();
+    let result = docSnap.data() as Statistics;
+    result.debit = result.debit ?? 0;
+    result.credit = result.credit ?? 0;
+    result.cash = result.cash ?? 0;
+    return result;
   } else {
     return {
       value: 0,
