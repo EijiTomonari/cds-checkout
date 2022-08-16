@@ -58,7 +58,8 @@ export const processOMRData = (
 
 export const processBarCodesData = (
   barcodes: Array<string>,
-  productsList: DocumentData[]
+  productsList: DocumentData[],
+  quantity: number
 ) => {
   let processedItems = [];
   const mealResult = productsList.find((product) => product.code == "refeicao");
@@ -70,7 +71,9 @@ export const processBarCodesData = (
         (product) => product.code == barcode
       );
       if (searchResult) {
-        processedItems.push(searchResult);
+        for (let i = 0; i < quantity; i++) {
+          processedItems.push(searchResult);
+        }
       } else {
         let unknownItem = {
           name: "Item desconhecido",
