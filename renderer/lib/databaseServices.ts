@@ -125,7 +125,11 @@ export const fetchStatisticsByDate = async (date: Date) => {
   const docRef = doc(db, "statistics", date.toDateString());
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    return docSnap.data();
+    let result = docSnap.data() as Statistics;
+    result.debit = result.debit ?? 0;
+    result.credit = result.credit ?? 0;
+    result.cash = result.cash ?? 0;
+    return result;
   } else {
     return {
       value: 0,
